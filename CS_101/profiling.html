@@ -1,0 +1,71 @@
+<h1 id="key-profiling-points">Key profiling points</h1>
+<h2 id="cprofile">cProfile</h2>
+<ul class="incremental">
+<li>Standard library module for profiling code.</li>
+<li><p>Can profile from a script like:</p>
+<pre><code>import cProfile
+import linear_systems
+cProfile.run(&quot;linear_systems.main()&quot;)</code></pre>
+<p>or on the command line with:</p>
+<pre><code>$ python3 -m cProfile linear_systems</code></pre></li>
+<li><p>This will produce a flat profile of functions and function calls:</p></li>
+</ul>
+<pre><code>         492457 function calls in 12.500 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000   12.500   12.500 &lt;string&gt;:1(&lt;module&gt;)
+        9    0.000    0.000    0.000    0.000 _bootlocale.py:23(getpreferredencoding)
+        9    0.000    0.000    0.000    0.000 codecs.py:185(__init__)
+        9    0.000    0.000    9.008    1.001 linear_systems_unoptimised.py:102(get_scalefactor)
+        9    0.054    0.006    0.223    0.025 linear_systems_unoptimised.py:107(save_matrices)
+        1    0.001    0.001   12.358   12.358 linear_systems_unoptimised.py:125(vec_func_2)
+        1    0.000    0.000    0.000    0.000 linear_systems_unoptimised.py:129(&lt;listcomp&gt;)
+        1    0.000    0.000   12.500   12.500 linear_systems_unoptimised.py:143(main)
+        2    0.011    0.005    0.073    0.037 linear_systems_unoptimised.py:16(gen_matrix)
+        2    0.000    0.000    0.000    0.000 linear_systems_unoptimised.py:18(&lt;listcomp&gt;)
+      200    0.001    0.000    0.001    0.000 linear_systems_unoptimised.py:20(&lt;listcomp&gt;)
+        9    0.001    0.000    0.001    0.000 linear_systems_unoptimised.py:35(one_divide_vec)
+     4009    0.063    0.000    0.064    0.000 linear_systems_unoptimised.py:42(dot)
+       10    0.001    0.000    0.001    0.000 linear_systems_unoptimised.py:52(axpy)
+        9    0.058    0.006    0.058    0.006 linear_systems_unoptimised.py:59(matvec)
+        9    0.000    0.000    0.000    0.000 linear_systems_unoptimised.py:62(&lt;listcomp&gt;)
+        9    3.002    0.334    3.031    0.337 linear_systems_unoptimised.py:69(matmul)
+        9    0.000    0.000    0.000    0.000 linear_systems_unoptimised.py:73(&lt;listcomp&gt;)
+        2    0.000    0.000    0.002    0.001 linear_systems_unoptimised.py:8(gen_vector)
+        9    0.035    0.004    0.035    0.004 linear_systems_unoptimised.py:86(scale_matrix)
+       40    0.003    0.000    0.066    0.002 linear_systems_unoptimised.py:94(vec_func_1)
+    20200    0.023    0.000    0.053    0.000 random.py:173(randrange)
+    20200    0.010    0.000    0.063    0.000 random.py:217(randint)
+    20200    0.022    0.000    0.030    0.000 random.py:223(_randbelow)
+        9    0.000    0.000    0.000    0.000 {built-in method _locale.nl_langinfo}
+        1    0.000    0.000   12.500   12.500 {built-in method builtins.exec}
+    97736    0.011    0.000    0.011    0.000 {built-in method builtins.len}
+        9    0.001    0.000    0.001    0.000 {built-in method io.open}
+        9    9.007    1.001    9.007    1.001 {built-in method time.sleep}
+    96100    0.019    0.000    0.019    0.000 {method &#39;append&#39; of &#39;list&#39; objects}
+    20200    0.002    0.000    0.002    0.000 {method &#39;bit_length&#39; of &#39;int&#39; objects}
+        1    0.000    0.000    0.000    0.000 {method &#39;disable&#39; of &#39;_lsprof.Profiler&#39; objects}
+    90900    0.140    0.000    0.140    0.000 {method &#39;format&#39; of &#39;str&#39; objects}
+    30706    0.006    0.000    0.006    0.000 {method &#39;getrandbits&#39; of &#39;_random.Random&#39; objects}
+    91827    0.028    0.000    0.028    0.000 {method &#39;write&#39; of &#39;_io.TextIOWrapper&#39; objects}</code></pre>
+<p>By default, the profile is ordered by function name, but we can sort it by, e.g. total time via the <code>-s</code> option on the command line:</p>
+<pre><code>python3 -m cProfile -s tottime linear_systems</code></pre>
+<p><code>-s</code> can sort by any of the column headings. - Profiles can produce a lot of output, so it's best to either pipe through <code>less</code> or redirect the output to a file via the <code>-o filename.dat</code> option (alternatively, we can pass a filename as the second argument to <code>cProfile.run(&quot;linear_systems.main()&quot;, &quot;filename.dat&quot;)</code> from a script).</p>
+<h2 id="microbenchmarking-aka-print-statement-profiling">Microbenchmarking (aka print-statement profiling)</h2>
+<ul class="incremental">
+<li>cProfile is very powerful for finding which <em>functions</em> are taking a lot of time, but doesn't help much with finding the bottlenecks <em>within</em> a function. For this, we can use good old fashioned print-statements (microbenchmarking, in more formal terminology).</li>
+<li>The <code>time</code> module contains a bunch of useful functions for retrieving and manipulating the time.</li>
+<li>The simplest way to get some microbenchmarks is with the <code>time.perf_counter()</code> function, which returns the current &quot;processor time&quot; (in seconds) as a floating point number. Crucially, this function is different from <code>time.clock()</code> and friends in that <code>time.perf_counter()</code> is defined such that the difference between two time points is meaningful (which is exactly what we want).</li>
+<li>The simplest way to use this functionality is to enclose a section of code in time-stamps like so:</li>
+</ul>
+<pre><code>import time
+
+start = time.perf_counter()
+do_stuff()
+end = time.perf_counter()
+
+elapsed = end - start
+print(&quot;do_stuff finished in {} s&quot;.format(elapsed))</code></pre>
+<p>You can have as many sections like this in a module as necessary, provided none of the variable names clash.</p>
