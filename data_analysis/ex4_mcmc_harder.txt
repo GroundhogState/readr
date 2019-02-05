@@ -1,14 +1,17 @@
-background: fitting for cosmological parameters Omega_m and w (for model=wCDM)
+Background: fitting for cosmological parameters Omega_m and w (for model=wCDM)
 or Omega_m (for model=LCDM, i.e. fixing w=-1), and a few other 'nuisance'
-parameters alpha, beta, M_1_B, Delta_M,
+parameters alpha, beta, M_1_B, Delta_M.
+
+The script ex4_mcmc_harder.py has some parts missing (search TODO), which you
+are to fill in:
 
 0. load in data from jla_lcparams.txt
 
-1. try make a useful plot
+1. try make a useful plot of the data
 
 2. lnlike: you are given mu_obs, mu_theory
 a) estimate chisq using diagonal errors only (as a first approximation, use errors in mb only)
-b) estimate covariance matrix Ceta using covmat_tridiagonal
+b) estimate covariance matrix Ceta using covmat_tridiagonal (you are given this)
 
 3. try running MCMC with different numbers of walkers, steps. make some plots.
 plots should in theory look something like ex4_LCDM_plot.png (for LCDM model).

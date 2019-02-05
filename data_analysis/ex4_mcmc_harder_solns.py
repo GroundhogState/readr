@@ -28,7 +28,7 @@ def lnlike(theta, z_hel, z_cmb, mb, x1, color, thirdvar, Ceta, sigma, model):
         if thirdvar[j] > 10:
             mu_theory[j] = mu_theory[j] + Delta_M
 
-    dmu = #TODO
+    dmu = (mu_obs - mu_theory)
 
     # simple diagonal errors
     Cmu = np.zeros((N,N))
@@ -40,10 +40,9 @@ def lnlike(theta, z_hel, z_cmb, mb, x1, color, thirdvar, Ceta, sigma, model):
     # errors from sigma only
     A = A_fn(alpha,beta,N)
     Cmu += A.dot(Ceta.dot(A.T))
-
     Cinv = np.linalg.pinv(Cmu)
 
-    chisq = #TODO
+    chisq = np.dot(dmu, (np.dot(Cinv, dmu)))
 
     ## calculate and store parameters and chi^2 values
     with open(chains + '/params.txt', 'a') as f:
@@ -186,7 +185,11 @@ if __name__ == "__main__":
     (options, args) = parser.parse_args()
 
     # load data
-    data = #TODO
+    data = np.genfromtxt('jla_lcparams.txt', skip_header=5,
+        usecols=(1,2,4,5,6,7,8,9,10,11,14,15,16),
+        names='zcmb,zhel,mb,dmb,x1,dx1,color,dcolor,3rdvar,d3rdvar,cov_m_s,cov_m_c,cov_s_c',
+        dtype=float
+    )
     mb = data['mb']
     x1 = data['x1']
     color = data['color']
