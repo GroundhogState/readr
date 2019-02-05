@@ -1,0 +1,17 @@
+background: fitting for cosmological parameters Omega_m and w (for model=wCDM)
+or Omega_m (for model=LCDM, i.e. fixing w=-1), and a few other 'nuisance'
+parameters alpha, beta, M_1_B, Delta_M,
+
+0. load in data from jla_lcparams.txt
+
+1. try make a useful plot
+
+2. lnlike: you are given mu_obs, mu_theory
+a) estimate chisq using diagonal errors only (as a first approximation, use errors in mb only)
+b) estimate covariance matrix Ceta using covmat_tridiagonal
+
+3. try running MCMC with different numbers of walkers, steps. make some plots.
+plots should in theory look something like ex4_LCDM_plot.png (for LCDM model).
+what is a good amount of burn in?
+
+4. feel free to go back to MCMC questions in ex2 and ex3 at any point
