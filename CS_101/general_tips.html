@@ -1,0 +1,58 @@
+<h1 id="miscellaneous-stuff-you-should-know">Miscellaneous stuff you should know</h1>
+<h2 id="python-specific">Python specific</h2>
+<ul class="incremental">
+<li>Learn the innards of Python:
+<ul class="incremental">
+<li>How are lists actually implemented?</li>
+<li>How are dicts implemented?</li>
+<li>What actually happens when you run a script?</li>
+<li>What is bytecode?</li>
+<li>Why are there so many different interpreters?</li>
+<li>How can you call C or Fortran code from python?</li>
+</ul></li>
+<li>Read the <a href="https://github.com/numpy/numpy">numpy</a> and <a href="https://github.com/scipy/scipy">scipy</a> source codes to see how they implement functions you commonly use (the source will probably be a mix of python and C).</li>
+<li>Try re-implementing the functions from numpy or scipy yourself. Compare the performance and semantics to the library versions and try to figure out why they're different (again, read the source code).</li>
+<li>Give <a href="https://cython.org/">Cython</a> a go. Cython is an optimising compiler for python that's kind of a python/C hybrid. It can really improve code execution time (although not as much as writing in plain C from the get-go).</li>
+</ul>
+<h2 id="general-cs">General CS</h2>
+<ul class="incremental">
+<li>Use an IDE/advanced code editor of some kind; they really help productivity and handle a lot of the trivial stuff in programming (think of an IDE as being like a word-processor for code). Jupyter and Anaconda will become more of a hindrance than a help as you get more proficient at programming). There's a whole bunch of IDEs out there, so try some and pick one that you like (I quite like <a href="https://code.visualstudio.com/">Microsoft VS Code</a>)</li>
+<li>Know about operating systems and how to get the most out of them
+<ul class="incremental">
+<li>Learn Linux/UNIX: this is what's installed on almost all clusters and servers, so you should know how to use them effectively</li>
+<li>Know how to use command-line tools (e.g. GNU coreutils), as well as scripting (Bash or Powershell)</li>
+<li>Windows is actually not very useful in scientific computing</li>
+</ul></li>
+<li>Learn a compiled language (particularly C, C++ and Fortran) - this will teach you a lot about software and how computers work (particularly memory and pointers)</li>
+<li>Learn how to use your compiler effectively. This includes writing code so it's easy to optimise, knowing when the compiler is smarter than you (almost always) and how to write code to effectively utilise CPU/hardware
+<ul class="incremental">
+<li>Super important for numerical work: know the difference between row-major and column-major ordering for multidimensional arrays (matrices) and which one your language uses (C uses row-major, Fortran uses column-major).</li>
+</ul></li>
+<li>Learn how to use memory properly, particularly when to pass by value vs when to pass by reference.
+<ul class="incremental">
+<li>Navigating caches and cache-coherency is critically important for high-performance code</li>
+</ul></li>
+<li>Hardware is important - every computational scientist should at least know the basics of CPU architecture (including how to find out what your machine is running on), memory models and I/O.
+<ul class="incremental">
+<li>Have a rough understanding of how long different operations (e.g. cache hits, memory fetches, disk I/O) take to execute. <a href="http://ithare.com/infographics-operation-costs-in-cpu-clock-cycles/">Here's a good chart</a></li>
+<li>Also need to know about things like branch-prediction, speculative execution, caching (really important), memory transfer rates, optimal arithmetic intensity (ratio of arithmetic operations to memory accesses).</li>
+<li>For that matter, you should know how to determine whether your code is compute bound vs memory bound vs I/O bound and what the implications of that are (plus how to fix that for your specific hardware and OS)</li>
+</ul></li>
+<li>Know the basics of algorithms and data structures, as well as how they're implemented. The basics are:
+<ul class="incremental">
+<li>computational complexity (big-O notation),</li>
+<li>recursion,</li>
+<li>searching,</li>
+<li>sorting,</li>
+<li>arrays,</li>
+<li>linked-lists,</li>
+<li>trees,</li>
+<li>associative arrays/hash tables,</li>
+<li>Threads, concurrency and asynchronous operations</li>
+</ul></li>
+<li><p>&quot;Algorithms and Data Structures with Python&quot; by Lee and Hubbard is a good starter text. Also check out &quot;Algorithms and Data Structures in C&quot; by Noel Kalicharan - it's super important to learn how to implement this stuff in C</p></li>
+<li><p>Read other people's code: great novelists read a variety of books, great programmers read a variety of code</p></li>
+<li><p>It's important to develop and intuition for when to write code yourself vs when to use a library. The general rule is &quot;don't reinvent the wheel, unless you think you can do it better&quot;. Re-writing small functions can be fine (if it's going to take less time to write it yourself than to integrate a library), but think very carefully before trying to re-implement, say, a linear algebra library.</p></li>
+<li><p>Coding takes practice. You can pick up stuff as you go, but if you want to get really good it will require a bit of extra homework.</p></li>
+<li><p>Ergonomics is important! As a PhD student, your work depends crucially on being able to type, so RSI can <strong>really</strong> mess up your life. Get a good ergonomic setup as soon as possible (your university should be able to help with this).</p></li>
+</ul>

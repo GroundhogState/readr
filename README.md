@@ -28,3 +28,8 @@ After which you can install all of the packages above with
 conda install package1 package2...
 Followed by
 conda install -c conda-forge ase jupyter_contrib_nbextensions
+
+
+## Staying in touch
+
+Join the FB page here https://www.facebook.com/groups/2188458721408193/ to share photos, thoughts, projects, recipes, couchsurfing requests, etc.
