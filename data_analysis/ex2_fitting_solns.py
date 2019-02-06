@@ -27,6 +27,10 @@ or distance modulus; larger mu means further away
 #      1 and 2 are separate flags
 #   b) does brightness depend primarily on period, or on metallicity?
 
+m_W = cepheid_data['m_H'] - 0.4*cepheid_data['V-I']
+met = cepheid_data['met']
+logP = np.log10(cepheid_data['P'])
+
 # 2. using just cepheids in ngc 4258, obtain a rough estimate for coefficients
 # a and/or b (as appropriate/possible) using:
 #   a) np.polyfit
