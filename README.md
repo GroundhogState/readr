@@ -22,6 +22,8 @@ conda install -c conda-forge ase packagename
 
 # Resources for research
 
+Some useful tools for managing projects, workflow, time, (& etc) are over in [this repository](https://github.com/GroundhogState/workflow)
+
 At the ANU, the [Academic skills & learning centre](http://www.anu.edu.au/students/contacts/academic-skills) have lots of resources for managing research projects, and the (ANU counselling centre)[http://www.anu.edu.au/students/health-safety-wellbeing/counselling] are available as a 'prefrontal cortex for hire'. It's been a pleasure to work with both in building the retreat.
 
 # Staying in touch
