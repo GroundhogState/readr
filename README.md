@@ -1,5 +1,12 @@
 # readr
 
+Hello, and thank you for taking the leap of faith to join the retreat.
+This is only the second iteration of the retreat. You, the students, are uniquely placed to help improve the experience for future generations.
+It would be a great help if you could fill out [this anonymous survey](https://goo.gl/forms/PcKmcCjAmbD6SLR62).
+Afterwards, please remain in the dining hall for a closing discussion. After that, you're free.
+
+Thank you <3
+
 ## Resources for the retreat
 Hello!
 
